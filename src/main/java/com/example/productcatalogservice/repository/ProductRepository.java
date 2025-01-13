@@ -9,9 +9,22 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-//    @Query("select * from Product where id=?")
-//    Product findbyId(Long id);
-//    Product save(Product product);
 
-//    Product updateByProductId(Long id, Product product);
+
+    Product findbyId(Long id);
+    Product save(Product product);
+    Product updateByProductId(Long id, Product product);
+
+    Product findProductByDescriptionAndAndName(String name, String description);
+
+
+    @Query("select p.description from Product p where p.id=?1")// Positional Parameters(?)
+    String findProductDescriptionById(Long id);
+
+    @Query("SELECT c.name FROM Category c join Product p on p.category.id=c.id where p.id=:pid")// Named Parameters(:)
+    String findCategoryNameByProductId(Long pid);
+
+
+
+
 }

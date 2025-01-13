@@ -24,12 +24,11 @@ public class ProductCatalogStorageService implements IProductCatalogService{
 
     @Override
     public Product getProductById(Long id) {
-//        productRepository.findById(id);
+
         return productRepository.findById(id).get();
 
     }
 
-//    @Transactional
     @Override
     public Product createProduct(Product product) {
         return productRepository.save(product);

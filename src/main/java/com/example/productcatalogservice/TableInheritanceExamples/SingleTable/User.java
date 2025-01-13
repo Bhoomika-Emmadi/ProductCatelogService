@@ -1,12 +1,10 @@
 package com.example.productcatalogservice.TableInheritanceExamples.SingleTable;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
+import jakarta.persistence.*;
 
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Entity(name = "st_user")
+@DiscriminatorColumn(name="user_type",discriminatorType = DiscriminatorType.INTEGER)
 public class User {
     @Id
     Long id;
