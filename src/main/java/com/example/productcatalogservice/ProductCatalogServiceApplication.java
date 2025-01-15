@@ -5,9 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
-//@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class}, scanBasePackages = { "com.example.productcatalogservice.models"})
+
 @SpringBootApplication
-//@EntityScan(basePackages = "com.example.productcatalogservice.models")
 public class ProductCatalogServiceApplication {
 
 	public static void main(String[] args) {
