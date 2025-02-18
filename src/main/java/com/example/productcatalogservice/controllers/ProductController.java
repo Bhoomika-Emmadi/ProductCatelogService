@@ -8,6 +8,7 @@ import com.example.productcatalogservice.models.Category;
 import com.example.productcatalogservice.models.Product;
 import com.example.productcatalogservice.services.IProductCatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
@@ -22,6 +23,8 @@ public class ProductController {
 
     @Autowired
     IProductCatalogService productService;
+    @Autowired
+    private RestTemplateBuilder restTemplateBuilder;
 
 // we need /getAllProducts, /getProductById, / createProduct, /deleteProduct
 
@@ -56,7 +59,10 @@ public class ProductController {
 
     @PostMapping("/products")
     public ProductDto createProduct(@RequestBody ProductDto productDto){
-        return fromProduct(productService.createProduct(fromProductDto(productDto)));
+        Product product = fromProductDto(productDto);
+        Product response = productService.createProduct(product);
+        ProductDto responseDto = fromProduct(response);
+        return responseDto;
 
     }
 
