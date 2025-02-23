@@ -8,6 +8,8 @@ import com.example.productcatalogservice.models.Product;
 import com.example.productcatalogservice.services.IProductCatalogService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +23,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
 @SpringBootTest
@@ -33,6 +35,9 @@ public class ProductControllerTest {
 
     @MockitoBean
     IProductCatalogService productService;
+
+    @Captor
+    ArgumentCaptor<Long> idCaptor;
 
     private ProductDto productDto;
     private Product mockProduct;
@@ -82,7 +87,8 @@ public class ProductControllerTest {
         assertNotNull(response);
         assertNotNull(response.getBody());
         assertEquals(productId, response.getBody().getId());
-        assertEquals("Iphone", response.getBody().getName());
+        assertEquals("Test Product", response.getBody().getName());
+        verify(productService,times(1)).getProductById(productId);// productservice is only called once in the function getProductById
 
     }
 
@@ -91,6 +97,7 @@ public class ProductControllerTest {
         Long productId = 0L;
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {controller.getProductById(productId);});
         assertEquals("Please provide correct ID", exception.getMessage());
+
     }
 
     @Test
@@ -135,6 +142,8 @@ public class ProductControllerTest {
         //assert
         assertNotNull(response);
         assertEquals(products.size(), response.size());
+        verify(productService,times(1)).getProducts();// productservice is only called once
+
 
     }
 
@@ -149,6 +158,8 @@ public class ProductControllerTest {
 
         //assert
         assertNotNull(response);
+        verify(productService,times(1)).createProduct(mockProduct);// productservice is only called once
+
     }
 
     @Test
@@ -163,6 +174,8 @@ public class ProductControllerTest {
 
         //assert
         assertNotNull(response);
+        verify(productService,times(1)).replaceProduct(anyLong(),any(Product.class));// productservice is only called once
+
     }
 
     @Test
@@ -174,6 +187,9 @@ public class ProductControllerTest {
         assertEquals(200, response.getStatusCodeValue());
         assertEquals(productId, response.getBody().getId());
 
+        verify(productService,times(1)).deleteProduct(anyLong());// productservice is only called once
+
+
     }
 
     @Test
@@ -183,6 +199,7 @@ public class ProductControllerTest {
         Exception  exception = assertThrows(IllegalArgumentException.class, () -> {controller.deleteProduct(productId);});
         assertNotNull(exception);
         assertEquals("Please provide correct ID", exception.getMessage());
+
     }
 
     @Test
@@ -196,6 +213,20 @@ public class ProductControllerTest {
         assertNotNull(response);
         assertEquals(404, response.getStatusCodeValue());
         assertEquals(null, response.getBody());
+    }
+
+    @Test
+    public void TestgetProductById_checkTheProductServiceCalledByCorrectId_runsSuccessfully(){
+        //arrange
+        when(productService.getProductById(anyLong())).thenReturn(mockProduct);
+
+        //act
+        controller.getProductById(mockProduct.getId());
+
+        //assert
+        verify(productService).getProductById(idCaptor.capture());
+        assertEquals(mockProduct.getId(),idCaptor.getValue());
+
     }
 
 
