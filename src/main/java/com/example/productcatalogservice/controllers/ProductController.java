@@ -1,14 +1,12 @@
 package com.example.productcatalogservice.controllers;
 
 
-
 import com.example.productcatalogservice.dto.CategoryDto;
 import com.example.productcatalogservice.dto.ProductDto;
 import com.example.productcatalogservice.models.Category;
 import com.example.productcatalogservice.models.Product;
 import com.example.productcatalogservice.services.IProductCatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
@@ -23,8 +21,6 @@ public class ProductController {
 
     @Autowired
     IProductCatalogService productService;
-    @Autowired
-    private RestTemplateBuilder restTemplateBuilder;
 
 // we need /getAllProducts, /getProductById, / createProduct, /deleteProduct
 

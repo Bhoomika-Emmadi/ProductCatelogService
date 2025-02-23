@@ -5,7 +5,6 @@ import com.example.productcatalogservice.dto.ProductDto;
 import com.example.productcatalogservice.models.Product;
 import com.example.productcatalogservice.services.IProductCatalogService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.swagger.v3.core.util.Json;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
