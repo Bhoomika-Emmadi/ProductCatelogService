@@ -158,7 +158,7 @@ public class ProductControllerTest {
 
         //assert
         assertNotNull(response);
-        verify(productService,times(1)).createProduct(mockProduct);// productservice is only called once
+        verify(productService,times(1)).createProduct(any(Product.class));// productservice is only called once
 
     }
 

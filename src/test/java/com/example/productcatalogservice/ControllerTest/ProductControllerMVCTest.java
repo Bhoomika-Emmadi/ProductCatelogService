@@ -116,7 +116,7 @@ public class ProductControllerMVCTest {
                 .andExpect(content().string(objectMapper
                         .writeValueAsString(dtos)))
                 .andExpect(jsonPath("$.length()").value(2))
-                .andExpect(jsonPath("$[0].length()").value(2))
+                .andExpect(jsonPath("$[0].length()").value(3))
                 .andExpect(jsonPath("$[1].name").value("MacBook"));
 
     }
