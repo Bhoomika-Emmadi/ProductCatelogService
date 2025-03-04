@@ -4,7 +4,6 @@ import com.example.productcatalogservice.client.FakeStoreAPIClient;
 import com.example.productcatalogservice.dto.FakeStoreProductDto;
 import com.example.productcatalogservice.models.Category;
 import com.example.productcatalogservice.models.Product;
-import org.springframework.beans.InvalidPropertyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -21,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ProductCatalogService implements IProductCatalogService {
+public class FakeStoreProductService implements IProductCatalogService {
 
     @Autowired
     RestTemplateBuilder restTemplatebuilder;

@@ -3,16 +3,14 @@ package com.example.productcatalogservice.ControllerTest;
 import com.example.productcatalogservice.controllers.ProductController;
 import com.example.productcatalogservice.dto.ProductDto;
 import com.example.productcatalogservice.models.Product;
-import com.example.productcatalogservice.services.ProductCatalogService;
+import com.example.productcatalogservice.services.FakeStoreProductService;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
@@ -21,7 +19,7 @@ import static org.mockito.Mockito.*;
 public class ProductControllerStubTest {
 
     @Mock
-    ProductCatalogService productService;
+    FakeStoreProductService productService;
 
     @InjectMocks
     ProductController productController;
